@@ -125,7 +125,7 @@ function ChatMenu(props) {
             </nav>
             <main className={classes.content}>
                 {/* <div className={classes.toolbar} /> */}
-                <ChatWindow />
+                <ChatWindow selectedBot={props.selectedBot} />
             </main>
         </div>
     );

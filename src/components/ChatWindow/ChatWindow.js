@@ -3,11 +3,11 @@ import ChatDisplay from './ChatDisplay'
 import ChatHeader from './ChatHeader'
 import ChatInput from './ChatInput'
 
-export default function ChatWindow() {
+export default function ChatWindow(props) {
     return (
         <>
             <ChatDisplay />
-            <ChatInput />
+            {props.selectedBot && <ChatInput />}
         </>
     )
 }
