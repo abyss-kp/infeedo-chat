@@ -62,7 +62,7 @@ export default function ChatList(props) {
         <div>
             <div className={classes.toolbar} >CHATS</div>
             <Divider />
-            <List >
+            <List onClick={() => props.setMobileOpen ? props.setMobileOpen(false) : null}>
                 {BOTS.map((name, index) => (
                     <React.Fragment key={name + index}>
                         <ChatItem name={name} />

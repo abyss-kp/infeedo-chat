@@ -108,7 +108,7 @@ function ChatMenu(props) {
                             keepMounted: true,
                         }}
                     >
-                        <ChatList />
+                        <ChatList setMobileOpen={setMobileOpen} />
                     </Drawer>
                 </Hidden>
                 <Hidden xsDown implementation="css">
