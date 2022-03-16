@@ -2,22 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ChatList from './ChatList';
-import ChatDisplay from '../ChatWindow/ChatDisplay';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import { connect } from 'react-redux';
 import ChatHeader from '../ChatWindow/ChatHeader';
@@ -38,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
         },
+        backgroundImage: 'linear-gradient(-225deg, rgb(80, 204, 204) 35%, rgb(69, 174, 202) 100%)'
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -45,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
-    toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
     },
@@ -56,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        marginTop: 50,
+        marginTop: 60,
         overflowY: 'auto',
 
     },
@@ -88,7 +80,7 @@ function ChatMenu(props) {
                         <MenuIcon />
                     </IconButton>
                     {props.selectedBot ? <ChatHeader name={props.selectedBot} /> : <Typography variant="h6" noWrap>
-                        Infeedo Chat
+                        inFeedo Chat
                     </Typography>
                     }
                 </Toolbar>
@@ -124,7 +116,6 @@ function ChatMenu(props) {
                 </Hidden>
             </nav>
             <main className={classes.content}>
-                {/* <div className={classes.toolbar} /> */}
                 <ChatWindow selectedBot={props.selectedBot} />
             </main>
         </div>

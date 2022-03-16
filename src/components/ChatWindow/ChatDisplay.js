@@ -2,10 +2,11 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from '@material-ui/core'
 import { connect } from 'react-redux';
-import { deepOrange } from "@material-ui/core/colors";
+import PanToolIcon from '@material-ui/icons/PanTool';
+import IconButton from '@material-ui/core/IconButton';
+import { saveMessage } from '../../store/actions/messageAction';
 const useStyles = makeStyles((theme) => ({
     container: {
-        // height: 'calc(100% - 150px)'
     },
     messageRow: {
         display: "flex"
@@ -21,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
         padding: "10px",
         backgroundColor: "#A8DDFD",
         width: "60%",
-        //height: "50px",
         textAlign: "left",
         font: "400 .9em 'Open Sans', sans-serif",
         border: "1px solid #97C6E3",
@@ -49,16 +49,15 @@ const useStyles = makeStyles((theme) => ({
             left: "-17px"
         }
     },
-    messageOrange: {
+    messageGreen: {
         position: "relative",
         marginRight: "20px",
         marginBottom: "10px",
         padding: "10px",
         backgroundColor: "#f8e896",
         width: "60%",
-        //height: "50px",
         textAlign: "left",
-        font: "400 .9em 'Open Sans', sans-serif",
+        font: "300 .8em 'Open Sans', sans-serif",
         border: "1px solid #dfd087",
         borderRadius: "10px",
         "&:after": {
@@ -84,23 +83,24 @@ const useStyles = makeStyles((theme) => ({
             right: "-17px"
         }
     },
-
     messageContent: {
         padding: 0,
         margin: 0
     },
-    orange: {
-        color: theme.palette.getContrastText(deepOrange[500]),
-        backgroundColor: deepOrange[500],
-        width: theme.spacing(4),
-        height: theme.spacing(4)
-    },
+    botName: {
+        fontSize: 10,
+        fontFamily: 'cursive',
+        fontWeight: 'bold'
+    }
 }))
 
 const MessageLeft = (props, classes) => {
     const message = props.msg ? props.msg : "no message";
     return (
         <>
+            <Typography className={classes.botName}>
+                {props.selectedBot}
+            </Typography>
             <div className={classes.messageRow}>
                 <div className={classes.messageBlue}>
                     <div>
@@ -116,7 +116,7 @@ const MessageRight = (props, classes) => {
     const message = props.msg ? props.msg : "no message";
     return (
         <div className={classes.messageRowRight}>
-            <div className={classes.messageOrange}>
+            <div className={classes.messageGreen}>
                 <p className={classes.messageContent}>{message}</p>
             </div>
         </div>
@@ -132,12 +132,26 @@ function ChatDisplay(props) {
                 messages.map(msg =>
                     <>
                         {MessageRight({ msg }, classes)}
-                        {MessageLeft({ msg }, classes)}
+                        {MessageLeft({ msg, selectedBot }, classes)}
                     </>
                 ) :
-                <Typography paragraph>
-                    Type something to Start the chat
-                </Typography> :
+                <>
+                    <Typography paragraph>
+                        Be the first one to start the chat.
+                    </Typography>
+                    <IconButton
+                        color="primary"
+                        aria-label="open drawer"
+                        disableFocusRipple
+                        disableRipple
+                        size="small"
+                        onClick={() => {
+                            props.saveMessage('Hi!!', props.selectedBot)
+                        }}
+                    >
+                        Send a Hi! to {props.selectedBot} <PanToolIcon />
+                    </IconButton>
+                </> :
                 <Typography paragraph>
                     Select a Bot from chat menu to start chatting
                 </Typography>
@@ -150,4 +164,4 @@ const mapStateToProps = ({ messageReducer }) => ({
     messages: messageReducer.messages,
     selectedBot: messageReducer.selectedBot
 })
-export default connect(mapStateToProps, null)(ChatDisplay)
+export default connect(mapStateToProps, { saveMessage })(ChatDisplay)

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from '@material-ui/icons/Send';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { saveMessage } from '../../store/actions/messageAction';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -23,10 +22,6 @@ const useStyles = makeStyles((theme) =>
     },
     wrapText: {
         width: "100%"
-    },
-    colorPrimary: {
-        //margin: theme.spacing(1),
-        color: theme.palette.primary
     },
 })
 );
